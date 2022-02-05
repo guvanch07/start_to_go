@@ -1,55 +1,55 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
 func main() {
-	var message string
-	message = "i started to learn go"
-	message = "good luck"
-	fmt.Println(message)
 
-	_varibles()
-	_functions("function is ready")
-	somethingfunc := returnstring("guvanch", 23)
-	println(somethingfunc)
+	mess := "Soon i become go"
+	fmt.Println(mess)
+	changeMessage(&mess)
+	fmt.Println(mess)
 
-	age, whattodo := enterToThe(34)
-	//age, _ := enterToThe(34)
-	println(age, whattodo)
+	// //замкание
 
-}
+	// inc := increment()
 
-//global
-var number int
+	// fmt.Println(inc())
+	// fmt.Println(inc())
+	// fmt.Println(inc())
+	// fmt.Println(inc())
 
-func _varibles() {
+	// fmt.Println(findmin(23, 3232, 32323, 4545, -434, -23, 23))
 
-	number = 124
+	// var message string
+	// message = "i started to learn go"
+	// message = "good luck"
+	// fmt.Println(message)
 
-	//only plus
-	var plusnumber uint
-	plusnumber = 32323
+	//varibles()
+	// _functions("function is ready")
+	// somethingfunc := returnstring("guvanch", 23)
+	// println(somethingfunc)
 
-	//double
-	var doublenumber float32
+	// age, whatis := enterToThe(34)
 
-	doublenumber = 377777777777777777.323
+	// //age, _ := enterToThe(34)
+	// println(age, whatis)
 
-	fmt.Println(number)
-	fmt.Println(plusnumber)
-	fmt.Println(doublenumber)
+	// howold, err := enterToTheWithError(12)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
+	// fmt.Println(howold)
 
-	a, b, c := 1, 2, 3
+	// // ананимные функции
+	// func() {
+	// 	fmt.Println("unnoumous func")
+	// }()
 
-	a, b = 4, 5
-
-	a, b = b, a
-
-	a, _, b = 1, 2, 3
-
-	fmt.Println(a, b, c)
 }
 
 ////functions
@@ -59,11 +59,13 @@ func _functions(varible string) {
 	fmt.Println(varible)
 }
 
+// return var
 func returnstring(name string, age int) string {
 	concatanation := fmt.Sprintf("hello, %s! you %d", name, age)
 	return concatanation
 }
 
+// return two or more varibles
 func enterToThe(age int) (string, bool) {
 	if age > 18 {
 		return "come in but be ceerfully", true
@@ -71,4 +73,47 @@ func enterToThe(age int) (string, bool) {
 		return "stop", false
 	}
 
+}
+
+//handler error from pck error
+func enterToTheWithError(age int) (string, error) {
+	if age > 18 {
+		return "come in but be ceerfully", nil
+	} else {
+		return "stop", errors.New("smth is wrong")
+	}
+
+}
+
+// find the smaller number
+
+func findmin(numbers ...int) int {
+	if len(numbers) == 0 {
+		return 0
+	}
+	min := numbers[0]
+
+	for _, i := range numbers {
+		if i < min {
+			min = i
+		}
+	}
+	return min
+}
+
+// замкание
+
+func increment() func() int {
+	count := 0
+
+	return func() int {
+		count++
+		return count
+	}
+}
+
+// указатели *deref &ref
+
+func changeMessage(mess *string) {
+	*mess += " from func changemessage"
 }
